@@ -1,25 +1,7 @@
 """
-import numpy as np
-import itertools
-"""
-import itertools
-"""
-a = "abcdefghijklmnopqrsntuvwxyz"
-itr = iter(a)
-
-while True:
-    try:
-        print(next(itr), end=" ")
-    except StopIteration:
-        break
-"""
-#help(itertools)
-
-"""
 # first: squares of even numbers
 
 # a - map+filter
-
 
 def f_square(x):
     return x**2
@@ -28,10 +10,8 @@ def f_square(x):
 def is_even(x):
     return x % 2 == 0
 
-
 def convert_square(arr):
     return map(f_square, filter(is_even, arr))
-
 
 def convert_square_lambda(arr):
     return map(lambda x: x**2, filter(lambda x: x % 2 == 0, arr))
@@ -45,23 +25,38 @@ new = [i ** 2 for i in arr if i % 2 == 0]
 ########################################
 
 # second: select some certain letters
+"""
+def filter1(arr):
+    def filter2(dic):
+        return dic[0] in arr
+    return filter2
 
+def exctract(x):
+    return x[1]
 
 strg = "abcdefghijklmnopqrsntuvwxyz"
 arr = [1, 5, 8, 2, 7]
 
 # a - map+filter
 
+res = map(exctract, filter(filter1(arr), enumerate(strg)))
+for x in res:
+    print(x, end='')
+
+"""
+"""
 dictt = enumerate(strg)
 cutted = filter(lambda x: x[0] in arr, dictt)
-cutted1 = map()
+for x in cutted:
+    print(x[1], end='')
+"""
 
 # b - list comprehension
 
 # out = [strg[i] for i in arr]
 
 ########################################
-"""
+
 # third:
 
 import pyperclip
@@ -79,7 +74,7 @@ dictionary.remove('')
 out = [("".join(map(f_3_correct, dictionary)) + ".")]
 
 print(out)
-"""
+
 """
 for x in dictionary:
     s = s.lower()

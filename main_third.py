@@ -27,42 +27,27 @@ for i in prime():
     print(i)
 """
 
-
+"""
 #######################################
 # first task: all words in text generator
-def all_words(s):
-    """
-    s = s.replace('! ', ' ')
-    s = s.replace(', ', ' ')
-    s = s.replace('. ', ' ')
-    s = s.replace(': ', ' ')
-    s = s.replace('!', ' ')
-    s = s.replace(',', ' ')
-    s = s.replace('.', ' ')
-    s = s.replace(':', ' ')
-    s1 = s.split(' ')
-    """
-    n1 = 0
-    n2 = 0
+def tear_into_words(s):
+    n1, n2 = 0, 0
     while n1 >= 0:
-        n2 = s.index(' ', n2)
-        if n2 < 0:
+        try:
+            n2 = s.index(' ', n2)
+        except ValueError: # if index() can't find substring, the exception will be raised, not return -1
+            yield s[n1:len(s)]
             break
         yield s[n1:n2]
         n2 += 1
         n1 = n2
 
 
+text = "If you use any(lst) you see that lst is the iterable, which is a list of some items. If it contained [0, False, '', 0.0, [], {}, None] (which all have boolean values of False) then any(lst) would be False. If lst also contained any of the following [-1, True, "X", 0.00001] (all of which evaluate to True) then any(lst) would be True. In the code you posted, x > 0 for x in lst, this is a different kind of iterable, called a generator expression. Before generator expressions were added to Python, you would have created a list comprehension, which looks very similar, but with surrounding []'s: [x > 0 for x in lst]. From the lst containing [-1, -2, 10, -4, 20], you would get this comprehended list: [False, False, True, False, True]. This internal value would then get passed to the any function, which would return True, since there is at least one True value. But with generator expressions, Python no longer has to create that internal list of True(s) and False(s), the values will be generated as the any function iterates through the values generated one at a time by the generator expression. And, since any short-circuits, it will stop iterating as soon as it sees the first True value. This would be especially handy if you created lst using something like lst = range(-1,int(1e9)) (or xrange if you are using Python2.x). Even though this expression will generate over a billion entries, any only has to go as far as the third entry when it gets to 1, which evaluates True for x>0, and so any can return True. If you had created a list comprehension, Python would first have had to create the billion-element list in memory, and then pass that to any. But by using a generator expression, you can have Python's builtin functions like any and all break out early, as soon as a True or False value is seen."
 
-text = """If you use any(lst) you see that lst is the iterable, which is a list of some items. If it contained [0, False, '', 0.0, [], {}, None] (which all have boolean values of False) then any(lst) would be False. If lst also contained any of the following [-1, True, "X", 0.00001] (all of which evaluate to True) then any(lst) would be True. In the code you posted, x > 0 for x in lst, this is a different kind of iterable, called a generator expression. Before generator expressions were added to Python, you would have created a list comprehension, which looks very similar, but with surrounding []'s: [x > 0 for x in lst]. From the lst containing [-1, -2, 10, -4, 20], you would get this comprehended list: [False, False, True, False, True]. This internal value would then get passed to the any function, which would return True, since there is at least one True value. But with generator expressions, Python no longer has to create that internal list of True(s) and False(s), the values will be generated as the any function iterates through the values generated one at a time by the generator expression. And, since any short-circuits, it will stop iterating as soon as it sees the first True value. This would be especially handy if you created lst using something like lst = range(-1,int(1e9)) (or xrange if you are using Python2.x). Even though this expression will generate over a billion entries, any only has to go as far as the third entry when it gets to 1, which evaluates True for x>0, and so any can return True. If you had created a list comprehension, Python would first have had to create the billion-element list in memory, and then pass that to any. But by using a generator expression, you can have Python's builtin functions like any and all break out early, as soon as a True or False value is seen."""
-
-for x in all_words(text):
+for x in tear_into_words(text):
     print(x)
-
-#a = all_words(text)
-# for i in range(10):
-#     print(next(a))
-
+"""
 #######################################
 # second task
 """
@@ -81,7 +66,9 @@ for i in range(10):
 """
 #######################################
 # third task:
+
 """
+
 def arifm_prog(start):
     n = start
     while True:
@@ -90,6 +77,4 @@ def arifm_prog(start):
             n += 1
         else:
             n = n_new
-
-
 """

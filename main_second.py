@@ -59,25 +59,22 @@ for x in cutted:
 
 # third:
 
-import pyperclip
+# import pyperclip
 
-
+"""
 def f_3_correct(s):
     s1 = s.lower()
     s11 = s[0].upper()
     return s11 + s1[1:]
 
 
-s = "Minimal does not mean terse – don't sacrifice communication to brevity. Use consistent naming and indentation, and include comments if needed to explain portions of the code. Most code editors have a shortcut for formatting code – find it, and use it! Also, don't use tabs – they may look good in your editor, but they'll just make a mess on Stack Overflow."
-dictionary = s.split(".")
+s = "minimal does NOT mean terse – don't sacrifice communication to brevity. USE consistent naming and indentation, and include comments if needed to explain portions of the code. Most code editors have a shortcut for formatting code – find it, and use it! Also, don't use tabs – they may look good in your editor, but they'll just make a mess on StackOverflow. "
+dictionary = s.split(". ")
 dictionary.remove('')
-out = [("".join(map(f_3_correct, dictionary)) + ".")]
+dictionary = map(f_3_correct, dictionary)
+out = ""
+for x in dictionary:
+    out += x + ";"
 
 print(out)
-
-"""
-for x in dictionary:
-    s = s.lower()
-    s[0] = s[0].upper()
-    print(s+".")
 """

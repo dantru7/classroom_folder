@@ -26,7 +26,6 @@ def prime():
 for i in prime():
     print(i)
 """
-
 """
 #######################################
 # first task: all words in text generator
@@ -66,7 +65,6 @@ for i in range(10):
 """
 #######################################
 # third task:
-
 """
 
 def arifm_prog(start):

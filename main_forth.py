@@ -1,6 +1,9 @@
 import datetime
 import time
 
+############################################
+# NotATask: training
+
 """
 def decor(func):
     def wrap(*args, **kwargs):
@@ -25,7 +28,6 @@ f()
 
 ############################################
 # first task: print evaluation time
-#help(time.process_time())
 
 """
 def decor(f):
@@ -91,7 +93,7 @@ func(1, 3)
 func(1, 3)
 """
 
-# second task: decor + cache
+# third task: compare evaluation time of native and cachable fibonacci versions
 
 
 def convert(arg, dict):
@@ -107,45 +109,48 @@ def convert(arg, dict):
 
 def decor(f):
     def wrap(*arg, **kwargs):
-        start = time.perf_counter()
-        # res = 0
         arkw = convert(arg, kwargs)
         if len(wrap.dict) != 0:
             value = wrap.dict.get(arkw)
             if value is None:
                 res = f(*arg, **kwargs)
             else:
-                # wrap.dict[key] = value
                 res = value
         else:
             res = f(*arg, **kwargs)
         wrap.dict.update({arkw: res})
-        print("Eval Time: " + str(time.perf_counter() - start))
-        print(wrap.dict)
         return res
     wrap.dict = {}
     return wrap
 
 
-@decor
-def fib1(a):
-    if a == 1 or a == 2:
+def fib0(a):
+    assert(a >= 1)
+    assert(type(a) is int)
+    if a > 2:
+        return fib0(a-1) + fib0(a-2)
+    elif 1 <= a <= 2:
         return 1
-    res = 0
-    x1 = 1
-    x2 = 1
-    while a - 3 >= 0:
-        res = x1 + x2
-        x1 = x2
-        x2 = res
-        a -= 0
-    return res
 
 
-func(1, 2)
+time_ = time.perf_counter()
+fib0(30)
+time_ = time.perf_counter() - time_
+print("Native fibonacci # 30 time: " + str(time_))
+time_ = time.perf_counter()
+fib0(35)
+time_ = time.perf_counter() - time_
+print("Native fibonacci # 50 time: " + str(time_))
 
-func(1, 2)
-func(1, 3)
-func(1, 3)
+fib0 = decor(fib0)
 
+time_ = time.perf_counter()
+fib0(30)
+time_ = time.perf_counter() - time_
+print("Cachable fibonacci # 30 time: " + str(time_))
+time_ = time.perf_counter()
+fib0(35)
+time_ = time.perf_counter() - time_
+print("Cachable fibonacci # 50 time: " + str(time_))
 
+#fib0(-1)

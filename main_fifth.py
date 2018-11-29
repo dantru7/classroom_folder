@@ -33,8 +33,8 @@ import argparse
 import itertools
 
 parse = argparse.ArgumentParser(description='lalala')
-parse.add_argument('-n', dest='start', action='store',type=int,required=True,help='Start number of the sequence')
-parse.add_argument('-i', dest='step', action='store',type=int,required=True,help='Step of the sequence')
+parse.add_argument('-n', dest='start', action='store', type=int, required=True, help='Start number of the sequence')
+parse.add_argument('-i', dest='step', action='store', type=int, required=True, help='Step of the sequence')
 #parse.add_argument('-f', dest='path', action='store',type=str,required=False,help='Step of the sequence')
 subparsers = parse.add_subparsers(dest='mode')
 savesub = subparsers.add_parser('save')
@@ -56,5 +56,5 @@ else:
 
 for i in iter_:
     print(args.start + i * args.step)
-if args.save:
+if args.mode == "save":
     f.close()
